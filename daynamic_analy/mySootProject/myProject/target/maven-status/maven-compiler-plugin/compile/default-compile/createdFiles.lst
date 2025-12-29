@@ -1,0 +1,6 @@
+com/example/MethodInstrumenter.class
+com/example/VariableInstrumenter$VarDef.class
+com/example/DynamicLogger.class
+com/example/App.class
+com/example/App$1.class
+com/example/VariableInstrumenter.class
