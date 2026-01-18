@@ -1,4 +1,4 @@
-# PHDGFL Toolchain: Graph Construction (JSON → PyG .pt) and Training/Evaluation (GAT K-fold / Cross-Project)
+# PathFL Toolchain: Graph Construction (JSON → PyG .pt) and Training/Evaluation (GAT K-fold / Cross-Project)
 
 This repository contains three parts:  
 1) **Dynamic Analysis (Instrumentation + Logs → Dynamic Graph JSON)**: instrument a Defects4J project, run tests to produce execution logs, and parse the logs into a dynamic graph (PDDG) in JSON format.  
