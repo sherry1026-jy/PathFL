@@ -35,7 +35,7 @@ The repo provides `environment.yml`. Create and activate the environment:
 
 ```bash
 conda env create -f environment.yml
-conda activate phdgfl
+conda activate oathfl
 ```
 
 > If you need to match CUDA / PyTorch / PyG versions on your machine, adjust the corresponding versions in `environment.yml`.
@@ -43,6 +43,28 @@ conda activate phdgfl
 ### Java Environment (Required for Dynamic Analysis)
 
 - Java 11 (required by `daynamic_analy/mySootProject`)
+
+---
+
+# Quick Start
+
+## 1) Download the dataset from GitHub Release
+
+First, download the dataset from the [GitHub Release page](https://github.com/your_username/HPDG-FL/releases/tag/v1.0) for the processed dataset (`.pt` files).
+
+## 2) Within-Project K-fold Training (default)
+
+Once the dataset is downloaded and extracted, run the following command to start training with GAT on the dataset:
+
+```bash
+python train_gat.py \
+  --processed_roots /path/to/processed_dataset_v4_120/Time \
+  --raw_json_roots  /path/to/raw_json_data/Time \
+  --eval_protocol kfold \
+  --k_folds 4 \
+  --epoch_sweep 20,30,40,50,60 \
+  --result_dir ./results \
+  --result_text_file kfold_results.txt
 
 ---
 
@@ -160,7 +182,6 @@ python build_dataset.py /your/path/to/json_file \
   --output_root /your/path/to/pt_file \
   --datasets Closure,Time,Chart,Mockito,Lang,Math \
   --num_workers 2 \
-  --merge_nodes_by_line 1 \
   --edge_build_mode full \
   --feature_mode full
 ```
@@ -290,8 +311,6 @@ python train_gat.py \
   --processed_roots /your/path/to/pt_file/Time \
   --raw_json_roots  /your/path/to/json_file/Time \
   --eval_protocol kfold \
-  --k_folds 4 \
-  --epoch_sweep 20,30,40,50,60 \
   --result_dir ./results \
   --result_text_file kfold_results.txt
 ```
@@ -303,7 +322,6 @@ python train_gat.py \
   --processed_roots /your/path/to/pt_file/Time \
   --raw_json_roots  /your/path/to/json_file/Time \
   --eval_protocol cross_project \
-  --epoch_sweep 20,30,40,50,60 \
   --result_dir ./results \
   --result_text_file xproj_results.txt
 ```
@@ -315,7 +333,6 @@ python train_gat.py \
   --processed_roots /your/path/to/pt_file/Math \
   --raw_json_roots  /your/path/to/json_file/Math \
   --eval_protocol loo \
-  --epochs 60
 ```
 
 ---
