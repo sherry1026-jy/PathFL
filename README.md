@@ -61,8 +61,6 @@ python train_gat.py \
   --processed_roots /path/to/processed_dataset_v4_120/Time \
   --raw_json_roots  /path/to/raw_json_data/Time \
   --eval_protocol kfold \
-  --k_folds 4 \
-  --epoch_sweep 20,30,40,50,60 \
   --result_dir ./results \
   --result_text_file kfold_results.txt
 
