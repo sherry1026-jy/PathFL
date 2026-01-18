@@ -36,33 +36,32 @@ The repo provides `environment.yml`. Create and activate the environment:
 ```bash
 conda env create -f environment.yml
 conda activate oathfl
-```
+``` 
 
 > If you need to match CUDA / PyTorch / PyG versions on your machine, adjust the corresponding versions in `environment.yml`.
 
 ### Java Environment (Required for Dynamic Analysis)
 
 - Java 11 (required by `daynamic_analy/mySootProject`)
-
 ---
 
 # Quick Start
 
-## 1) Download the dataset from GitHub Release
+### 1) Download the dataset from GitHub Release
 
-First, download the dataset from the [GitHub Release page](https://github.com/your_username/HPDG-FL/releases/tag/v1.0) for the processed dataset (`.pt` files).
+First, download the dataset from the [GitHub Release page](https://github.com/sherry1026-jy/PathFL/releases/tag/v1.0) for the processed dataset (`.pt` files).
 
-## 2) Within-Project K-fold Training (default)
+### 2) Within-Project K-fold Training (default)
 
 Once the dataset is downloaded and extracted, run the following command to start training with GAT on the dataset:
 
 ```bash
 python train_gat.py \
   --processed_roots /path/to/processed_dataset_v4_120/Time \
-  --raw_json_roots  /path/to/raw_json_data/Time \
   --eval_protocol kfold \
   --result_dir ./results \
   --result_text_file kfold_results.txt
+```
 
 ---
 
