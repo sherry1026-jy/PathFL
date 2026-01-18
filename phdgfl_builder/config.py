@@ -4,8 +4,8 @@ import os
 import torch
 
 DEFAULT_CONFIG = {
-    "input_root_base": "/home/vipuser/test/dependency_graphs_all_120",
-    "output_root_base": "/home/vipuser/test/processed_dataset_v4_120",
+    "input_root_base": [],
+    "output_root_base": [],
 
     "datasets": ["Closure", "Time", "Chart", "Mockito", "Lang", "Math"],
 
@@ -29,7 +29,7 @@ DEFAULT_CONFIG = {
     "log_level": "INFO",
     "export_index_csv": True,
 
-    "merge_nodes_by_line": True,
+    "merge_nodes_by_line": False,
     "edge_build_mode": "full",
     "feature_mode": "full",
 }

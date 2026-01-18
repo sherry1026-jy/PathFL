@@ -18,12 +18,12 @@ DEFAULT_CONFIG: Dict = {
     #   - "loo"  : within-project leave-one-out
     #   - "xproj": cross-project (leave-one-project-out)
     "eval_protocol": "kfold",
-    "k_folds": 4,
+    "k_folds": [4,6,8,10],
 
     # Training
     "seed": 42,
-    "epochs": 60,
-    "epoch_sweep": None,         # e.g., [20, 30, 40] -> re-train per value
+    "epochs": 70,
+    "epoch_sweep": range(20,71),         
     "batch_size": 1,
     "lr": 1e-3,
     "weight_decay": 0.0,

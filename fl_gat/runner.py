@@ -32,16 +32,14 @@ def _bucket(project: str, pid: int, k: int) -> int:
 
 def run_kfold(cfg: Dict):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger.info(
-        f"Device={device.type} | AMP={cfg.get('use_amp')} | cache={cfg.get('cache_graphs_in_memory')} | workers={cfg.get('num_workers')}"
-    )
+    logger.info(f"Device={device.type} | AMP={cfg.get('use_amp')} | cache={cfg.get('cache_graphs_in_memory')} | workers={cfg.get('num_workers')}")
 
     ds = GraphListDataset(cfg, cfg["processed_roots"])
     bug_map = index_by_bug(ds)
     ks = (1, 3, 5, 10)
-    k = int(cfg.get("k_folds", 4) or 4)
+    k_folds = cfg.get("k_folds", [4, 6, 8, 10])  # 根据需求设置folds
 
-    epoch_sweep = cfg.get("epoch_sweep") or [int(cfg.get("epochs", 60))]
+    epoch_sweep = cfg.get("epoch_sweep") or range(20, 71)  # epoch从20到70
     epoch_sweep = sorted({int(e) for e in epoch_sweep if int(e) > 0})
     total_trials = len(epoch_sweep)
 
@@ -59,31 +57,27 @@ def run_kfold(cfg: Dict):
                 logger.info(f"[Project {project}] No positive bugs, skipped.")
                 continue
 
-            logger.info(f"[Project {project}] bugs={len(pids_pos)} | K={k} | max_epochs={max_ep}")
+            logger.info(f"[Project {project}] bugs={len(pids_pos)} | K={k_folds} | max_epochs={max_ep}")
             project_bug_results: List[Dict[str, float]] = []
 
-            for fold in range(k):
+            for fold in k_folds:
                 train_bug_indices: List[List[int]] = []
                 test_pids: List[int] = []
 
                 for pid in pids_pos:
-                    if _bucket(project, pid, k) == fold:
+                    if _bucket(project, pid, len(k_folds)) == fold:
                         test_pids.append(pid)
                     else:
                         train_bug_indices.append(pid_map[pid])
 
-                logger.info(f"[Project {project}] Fold {fold+1}/{k} | train_bugs={len(train_bug_indices)} | test_bugs={len(test_pids)}")
+                logger.info(f"[Project {project}] Fold {fold+1}/{len(k_folds)} | train_bugs={len(train_bug_indices)} | test_bugs={len(test_pids)}")
 
                 if not train_bug_indices or not test_pids:
                     logger.info(f"[Project {project}] Fold {fold+1}: empty train/test, skipped.")
                     continue
 
                 t0 = time.time()
-                model = train_once(
-                    cfg, ds, train_bug_indices, device,
-                    max_epochs=max_ep,
-                    force_no_early_stop=True,  # fixed epochs for epoch_sweep fairness
-                )
+                model = train_once(cfg, ds, train_bug_indices, device, max_epochs=max_ep)
                 train_time = time.time() - t0
                 if model is None:
                     logger.info(f"[Project {project}] Fold {fold+1}: train_once returned None, skipped.")
@@ -113,7 +107,7 @@ def run_kfold(cfg: Dict):
 
         candidate = {
             "protocol": "kfold",
-            "k_folds": k,
+            "k_folds": len(k_folds),
             "max_epochs": max_ep,
             "dropout": cfg["dropout"],
             "w_topk": cfg["w_topk"],
