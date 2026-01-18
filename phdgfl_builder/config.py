@@ -21,7 +21,7 @@ DEFAULT_CONFIG = {
     "empty_code_fallback": "/* EMPTY */",
 
     "edge_type_mapping": {"data_flow": 0, "call": 1, "cfg": 2, "return": 3, "entry": 4},
-    "edge_type_weight_coef": {"data_flow": 1.20, "call": 0.80, "cfg": 1.20, "return": 0.80, "entry": 0.80},
+    "edge_type_weight_coef": {"data_flow": 0.80, "call": 1.40, "cfg": 1.40, "return": 0.80, "entry": 0.60},
 
     "batch_size": 32 if torch.cuda.is_available() else 8,
     "num_workers": 2 if torch.cuda.is_available() else max(1, (os.cpu_count() or 2) - 1),
