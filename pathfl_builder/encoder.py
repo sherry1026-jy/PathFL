@@ -1,4 +1,4 @@
-# phdgfl_builder/encoder.py
+# pathfl_builder/encoder.py
 # -*- coding: utf-8 -*-
 import os
 import numpy as np

@@ -1,4 +1,4 @@
-# phdgfl_builder/edges.py
+# pathfl_builder/edges.py
 # -*- coding: utf-8 -*-
 import numpy as np
 import torch

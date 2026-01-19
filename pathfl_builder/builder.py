@@ -1,4 +1,4 @@
-# phdgfl_builder/builder.py
+# pathfl_builder/builder.py
 # -*- coding: utf-8 -*-
 import os
 import csv

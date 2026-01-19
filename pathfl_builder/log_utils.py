@@ -1,4 +1,4 @@
-# phdgfl_builder/log_utils.py
+# pathfl_builder/log_utils.py
 # -*- coding: utf-8 -*-
 import logging
 import torch

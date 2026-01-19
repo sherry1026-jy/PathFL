@@ -1,4 +1,4 @@
-# phdgfl_builder/worker.py
+# pathfl_builder/worker.py
 # -*- coding: utf-8 -*-
 import time
 import torch

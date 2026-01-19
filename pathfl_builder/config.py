@@ -1,4 +1,4 @@
-# phdgfl_builder/config.py
+# pathfl_builder/config.py
 # -*- coding: utf-8 -*-
 import os
 import torch

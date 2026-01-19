@@ -1,4 +1,4 @@
-# phdgfl_builder/features.py
+# pathfl_builder/features.py
 # -*- coding: utf-8 -*-
 import numpy as np
 

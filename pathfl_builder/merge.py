@@ -1,4 +1,4 @@
-# phdgfl_builder/merge.py
+# pathfl_builder/merge.py
 # -*- coding: utf-8 -*-
 from collections import defaultdict
 from copy import deepcopy

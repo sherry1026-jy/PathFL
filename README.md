@@ -16,8 +16,8 @@ Recommended layout (dynamic analysis + builder + training in one repo):
 ├── environment.yml                 # Conda environment (trainning env)
 ├── build_dataset.py                # Graph builder entry (CLI)
 ├── train_gat.py                    # Training/Evaluation entry (CLI)
-├── phdgfl_builder/                 # Graph Builder (JSON → .pt)
-├── phdgfl_train/                   # Training & Evaluation (.pt → metrics)
+├── pathfl_builder/                 # Graph Builder (JSON → .pt)
+├── fl_gat/                         # Training & Evaluation (.pt → metrics)
 └── daynamic_analy/                 # Dynamic Analysis (instrument → log → dynamic graph JSON)
     ├── mySootProject/              # Java 11: Soot instrumentation project (run via Maven)
     └── dependency_analy/           # Python: parse logs into dynamic dependency graph JSON
@@ -127,7 +127,7 @@ The script reads `/tmp/instrument.log` and outputs the parsed **dynamic graph (P
 
 ---
 
-# Part B: PHDGFL Graph Builder (JSON → PyG .pt)
+# Part B: PathFL Graph Builder (JSON → PyG .pt)
 
 After obtaining PDDG, you typically combine it with defect-line labels and a static dependency subgraph (which can be generated via Joern or Soot) to construct the hybrid dependency graph **HPDG**.  
 This part batch-converts HPDG JSON into PyTorch Geometric `Data` (`.pt`) and exports `index.csv` for training-time scanning.
@@ -267,7 +267,7 @@ Each `.pt` is a `torch_geometric.data.Data` object. Common fields:
 
 ---
 
-# Part C: PHDGFL Training & Evaluation (GAT Training and Evaluation)
+# Part C: PathFL Training & Evaluation (GAT Training and Evaluation)
 
 This part trains and evaluates a fault localization model based on `.pt` datasets produced by the Graph Builder:
 

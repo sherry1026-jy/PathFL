@@ -1,4 +1,4 @@
-# phdgfl_builder/graph_process.py
+# pathfl_builder/graph_process.py
 # -*- coding: utf-8 -*-
 import json
 import numpy as np

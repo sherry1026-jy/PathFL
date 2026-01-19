@@ -3,8 +3,8 @@
 import argparse
 from pathlib import Path
 
-from phdgfl_builder.config import DEFAULT_CONFIG, apply_cli_overrides
-from phdgfl_builder.builder import run_build
+from pathfl_builder.config import DEFAULT_CONFIG, apply_cli_overrides
+from pathfl_builder.builder import run_build
 
 
 def parse_args():

@@ -1,4 +1,4 @@
-# phdgfl_builder/discover.py
+# pathfl_builder/discover.py
 # -*- coding: utf-8 -*-
 from pathlib import Path
 
